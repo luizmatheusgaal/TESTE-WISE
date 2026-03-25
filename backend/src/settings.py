@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from pydantic import Field
 from pydantic_settings import (
     BaseSettings,
@@ -8,8 +7,8 @@ from pydantic_settings import (
     SettingsConfigDict,
 )
 
-ROOT_ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
 
+ROOT_ENV_FILE = Path(__file__).resolve().parents[1] / ".env"
 
 class Settings(BaseSettings):
     db_host: str = Field(...)
@@ -33,7 +32,12 @@ class Settings(BaseSettings):
         dotenv_settings: DotEnvSettingsSource,
         file_secret_settings: PydanticBaseSettingsSource,
     ):
-        return (dotenv_settings,)
+        return (
+            init_settings,
+            env_settings,
+            dotenv_settings,
+            file_secret_settings,
+        )
 
     @property
     def dsn(self) -> str:
