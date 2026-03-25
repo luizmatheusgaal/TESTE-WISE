@@ -3,7 +3,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from typing import Any
 
 from src.exceptions import ConflictError, NotFoundError, ValidationError
-from src.services import ProductService
+from src.services.product_service import ProductService
 
 
 MONEY_PRECISION = Decimal("0.01")
