@@ -12,5 +12,19 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
 
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-wisesales}
+      DB_USER: ${DB_USER:-wisesales}
+      DB_PASSWORD: ${DB_PASSWORD:-wisesales123}
+    ports:
+      - "8000:8000"
+
 volumes:
   pgdata:
