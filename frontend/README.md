@@ -122,3 +122,19 @@ cd backend
 ruff check .
 pytest --cov=src --cov-report=term-missing
 ```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run lint
+npm test
+npm run build
+```
+
+## Decisões técnicas relevantes
+- **Regras de negócio centralizadas no service layer**: a API apenas orquestra entrada/saída; as decisões de estoque, cupom e totais vivem no domínio da aplicação.
+- **Valores monetários tratados com `Decimal` no backend**: evita problemas de precisão em cálculos financeiros.
+- **Estado de UI separado por intenção**: o frontend diferencia `loading` inicial, `refreshing` e `pendingAction` para melhorar UX.
+- **Cliente HTTP com tratamento uniforme de erros**: falhas da API são propagadas com `message`, `status` e `details`.
+
