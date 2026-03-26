@@ -25,7 +25,7 @@ const INITIAL_STATE = {
   feedback: null
 };
 
-const CartContext = createContext(null);
+export const CartContext = createContext(null);
 
 function cartReducer(state, action) {
   switch (action.type) {
