@@ -1,8 +1,8 @@
 from contextlib import contextmanager
+
 from psycopg2.pool import SimpleConnectionPool
 
 from src.settings import settings
-
 
 pool = SimpleConnectionPool(1, 10, dsn=settings.dsn)
 

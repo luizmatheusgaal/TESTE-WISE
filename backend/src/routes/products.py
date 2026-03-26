@@ -1,7 +1,10 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, Query
 
 from src.dependencies import get_product_service
 from src.models import ProductResponse
+from src.services.product_service import ProductService
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -13,8 +16,8 @@ router = APIRouter(prefix="/products", tags=["products"])
     description="This endpoint returns all products, optionally filtered by category."
 )
 def list_products(
+    service: Annotated[ProductService, Depends(get_product_service)],
     category: str | None = Query(default=None),
-    service=Depends(get_product_service),
 ):
     return service.list_products(category)
 
@@ -26,5 +29,5 @@ def list_products(
     description="This endpoint returns detailed information about a single product\
                 identified by its ID."
 )
-def get_product(product_id: int, service=Depends(get_product_service)):
+def get_product(product_id: int, service: Annotated[ProductService, Depends(get_product_service)]):
     return service.get_product(product_id)

@@ -1,7 +1,8 @@
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, ConfigDict, Field, field_serializer
 from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field, field_serializer
 
 
 class APIModel(BaseModel):

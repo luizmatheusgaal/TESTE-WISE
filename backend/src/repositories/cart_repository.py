@@ -1,4 +1,5 @@
 from psycopg2.extras import RealDictCursor
+
 from src.db import get_connection
 
 
@@ -55,7 +56,11 @@ class CartRepository:
         """
         with get_connection() as conn, conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
-                "INSERT INTO cart_items (product_id, quantity) VALUES (%s, %s) RETURNING id, product_id, quantity",
+                """
+                INSERT INTO cart_items (product_id, quantity) 
+                VALUES (%s, %s) 
+                RETURNING id, product_id, quantity
+                """,
                 (product_id, quantity),
             )
             return cursor.fetchone()
@@ -68,7 +73,12 @@ class CartRepository:
         """
         with get_connection() as conn, conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
-                "UPDATE cart_items SET quantity = %s WHERE id = %s RETURNING id, product_id, quantity",
+                """
+                UPDATE cart_items 
+                SET quantity = %s 
+                WHERE id = %s 
+                RETURNING id, product_id, quantity
+                """,
                 (quantity, item_id),
             )
             return cursor.fetchone()

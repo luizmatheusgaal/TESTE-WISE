@@ -1,10 +1,9 @@
 from datetime import datetime, timezone
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
 from src.exceptions import ConflictError, NotFoundError, ValidationError
 from src.services.product_service import ProductService
-
 
 MONEY_PRECISION = Decimal("0.01")
 ZERO = Decimal("0.00")
@@ -49,12 +48,20 @@ class CartService:
         :param quantity int: Product quantity to be add in cart.
         """
         product = ProductService(self.product_repository).get_product(product_id)
-        self._ensure_stock(quantity, product["stock"], "Estoque insuficiente para a quantidade solicitada.")
+        self._ensure_stock(
+            quantity,
+            product["stock"],
+            "Estoque insuficiente para a quantidade solicitada."
+        )
 
         existing_item = self.cart_repository.get_item_by_product(product_id)
         if existing_item:
             new_quantity = existing_item["quantity"] + quantity
-            self._ensure_stock(new_quantity, product["stock"], "Quantidade total excede o estoque disponível.")
+            self._ensure_stock(
+                new_quantity,
+                product["stock"],
+                "Quantidade total excede o estoque disponível."
+            )
             self.cart_repository.update_item(existing_item["id"], new_quantity)
 
         else:
@@ -76,7 +83,11 @@ class CartService:
             self.cart_repository.delete_item(item_id)
             return self.get_cart()
 
-        self._ensure_stock(quantity, item["stock"], "Estoque insuficiente para atualizar a quantidade.")
+        self._ensure_stock(
+            quantity,
+            item["stock"],
+            "Estoque insuficiente para atualizar a quantidade."
+        )
         self.cart_repository.update_item(item_id, quantity)
         return self.get_cart()
 

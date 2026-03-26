@@ -5,8 +5,9 @@ Revises:
 Create Date: 2026-03-23 00:00:00
 """
 
-from alembic import op
 import sqlalchemy as sa
+
+from alembic import op
 
 revision = "0001_baseline"
 down_revision = None
@@ -38,7 +39,12 @@ def upgrade() -> None:
     op.create_table(
         "cart_items",
         sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("product_id", sa.Integer(), sa.ForeignKey("products.id", ondelete="CASCADE"), nullable=False),
+        sa.Column(
+            "product_id", 
+            sa.Integer(), 
+            sa.ForeignKey("products.id", ondelete="CASCADE"), 
+            nullable=False
+        ),
         sa.Column("quantity", sa.Integer(), nullable=False),
         sa.Column("created_at", sa.DateTime(), server_default=sa.text("NOW()")),
     )
