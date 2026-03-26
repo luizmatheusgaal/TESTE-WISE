@@ -10,6 +10,7 @@ from pydantic_settings import (
 
 ROOT_ENV_FILE = Path(__file__).resolve().parents[1] / ".env"
 
+
 class Settings(BaseSettings):
     db_host: str = Field(...)
     db_port: int = Field(...)
@@ -41,10 +42,7 @@ class Settings(BaseSettings):
 
     @property
     def dsn(self) -> str:
-        return (
-            f"dbname={self.db_name} user={self.db_user} password={self.db_password} "
-            f"host={self.db_host} port={self.db_port}"
-        )
+        return f"dbname={self.db_name} user={self.db_user} password={self.db_password} host={self.db_host} port={self.db_port}"
 
 
 settings = Settings()

@@ -13,8 +13,6 @@ if str(BACKEND_ROOT) not in sys.path:
     sys.path.insert(0, str(BACKEND_ROOT))
 
 
-
-
 class FakeProductRepository:
     def __init__(self):
         self.products = {
@@ -38,9 +36,30 @@ class FakeCartRepository:
         self.items = []
         self.next_id = 1
         self.coupons = {
-            "DESCONTO10": {"id": 1, "code": "DESCONTO10", "discount_type": "percentage", "discount_value": Decimal("10.00"), "active": True, "expires_at": __import__('datetime').datetime(2099,1,1)},
-            "VALE15": {"id": 2, "code": "VALE15", "discount_type": "fixed", "discount_value": Decimal("15.00"), "active": True, "expires_at": __import__('datetime').datetime(2099,1,1)},
-            "EXPIRADO20": {"id": 3, "code": "EXPIRADO20", "discount_type": "percentage", "discount_value": Decimal("20.00"), "active": True, "expires_at": __import__('datetime').datetime(2020,1,1)},
+            "DESCONTO10": {
+                "id": 1,
+                "code": "DESCONTO10",
+                "discount_type": "percentage",
+                "discount_value": Decimal("10.00"),
+                "active": True,
+                "expires_at": __import__("datetime").datetime(2099, 1, 1),
+            },
+            "VALE15": {
+                "id": 2,
+                "code": "VALE15",
+                "discount_type": "fixed",
+                "discount_value": Decimal("15.00"),
+                "active": True,
+                "expires_at": __import__("datetime").datetime(2099, 1, 1),
+            },
+            "EXPIRADO20": {
+                "id": 3,
+                "code": "EXPIRADO20",
+                "discount_type": "percentage",
+                "discount_value": Decimal("20.00"),
+                "active": True,
+                "expires_at": __import__("datetime").datetime(2020, 1, 1),
+            },
         }
 
     def list_items(self):

@@ -13,7 +13,7 @@ router = APIRouter(prefix="/products", tags=["products"])
     "",
     response_model=list[ProductResponse],
     summary="Retrieve a list of available products.",
-    description="This endpoint returns all products, optionally filtered by category."
+    description="This endpoint returns all products, optionally filtered by category.",
 )
 def list_products(
     service: Annotated[ProductService, Depends(get_product_service)],
@@ -27,7 +27,7 @@ def list_products(
     response_model=ProductResponse,
     summary="Retrieve details of a specific product.",
     description="This endpoint returns detailed information about a single product\
-                identified by its ID."
+                identified by its ID.",
 )
 def get_product(product_id: int, service: Annotated[ProductService, Depends(get_product_service)]):
     return service.get_product(product_id)

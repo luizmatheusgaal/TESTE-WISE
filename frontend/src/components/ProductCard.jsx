@@ -11,7 +11,6 @@ export function ProductCard({ product, isPending, onAdd }) {
           loading="lazy"
         />
       </div>
-
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-emerald-300">{product.category}</p>
@@ -19,21 +18,18 @@ export function ProductCard({ product, isPending, onAdd }) {
         </div>
         <span className="text-lg font-bold text-emerald-300">{formatCurrency(product.price)}</span>
       </div>
-
       <div className="mt-auto space-y-3">
         <p className={`text-sm ${product.stock === 0 ? 'text-rose-300' : 'text-slate-300'}`}>
           {product.stock === 0 ? 'Fora de estoque' : `${product.stock} unidades disponíveis`}
         </p>
-
         <button
           type="button"
           disabled={product.stock === 0 || isPending}
           onClick={onAdd}
-          className="w-full rounded-full bg-emerald-400 px-4 py-3 font-semibold text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+          className="w-full rounded-full bg-emerald-400 px-4 py-3 font-semibold text-slate-950 transition hover:bg-emerald-300 disabled:cursor-progress disabled:bg-slate-700 disabled:text-slate-400"
         >
-          {isPending ? 'Adicionando...' : 'Adicionar ao carrinho'}
+          Adicionar ao carrinho
         </button>
-
       </div>
     </article>
   );

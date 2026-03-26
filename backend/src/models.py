@@ -18,7 +18,6 @@ class APIModel(BaseModel):
         "discount_value",
         check_fields=False,
     )
-
     def serialize_decimal(self, value: Decimal) -> float:
         return float(value)
 
