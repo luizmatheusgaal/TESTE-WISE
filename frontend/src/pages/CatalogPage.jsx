@@ -5,7 +5,16 @@ import { useProducts } from '../hooks/useProducts';
 
 export function CatalogPage() {
   const { addItem, pendingAction } = useCart();
-  const { products, category, categories, loading, error, setCategory, allCategoriesValue } = useProducts();
+  const {
+    products,
+    category,
+    categories,
+    loadingInitial,
+    refreshing,
+    error,
+    setCategory,
+    allCategoriesValue
+  } = useProducts();
 
   return (
     <section className="space-y-6">
@@ -17,7 +26,6 @@ export function CatalogPage() {
             Explore os produtos, filtre por categoria e adicione itens ao carrinho com validação de estoque em tempo real.
           </p>
         </div>
-
         <label className="flex flex-col gap-2 text-sm text-slate-300">
           Categoria
           <select
@@ -36,13 +44,19 @@ export function CatalogPage() {
 
       <FeedbackBanner />
 
+      {refreshing && (
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-xs text-slate-400">
+          Atualizando produtos...
+        </div>
+      )}
+
       {error && (
         <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
           {error}
         </div>
       )}
 
-      {loading ? (
+      {loadingInitial ? (
         <div className="rounded-3xl border border-slate-800 bg-slate-900 p-10 text-center text-slate-300">
           Carregando produtos...
         </div>
