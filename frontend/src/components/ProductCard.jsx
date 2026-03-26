@@ -5,7 +5,7 @@ export function ProductCard({ product, isPending, onAdd }) {
     <article className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900 p-5 shadow-lg shadow-slate-950/30">
       <div className="mb-4 h-40 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800">
         <img
-          src={product.image_url ?? '/product-placeholder.svg'}
+          src={product.image_url ?? '/public/product-placeholder.svg'}
           alt={`Imagem do produto ${product.name}`}
           className="h-full w-full object-cover"
           loading="lazy"
