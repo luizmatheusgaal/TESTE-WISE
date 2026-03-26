@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { CartSummary } from '../components/CartSummary';
 import { FeedbackBanner } from '../components/FeedbackBanner';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 import { formatCurrency } from '../utils/formatters';
 
 export function CartPage() {

@@ -1,6 +1,6 @@
 import { FeedbackBanner } from '../components/FeedbackBanner';
 import { ProductCard } from '../components/ProductCard';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 import { useProducts } from '../hooks/useProducts';
 
 export function CatalogPage() {
