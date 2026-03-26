@@ -25,7 +25,7 @@ const INITIAL_STATE = {
   feedback: null
 };
 
-export const CartContext = createContext(null);
+const CartContext = createContext(null);
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -39,8 +39,7 @@ function cartReducer(state, action) {
     case 'ACTION_START':
       return {
         ...state,
-        pendingAction: action.pendingAction,
-        feedback: null
+        pendingAction: action.pendingAction
       };
     case 'SUCCESS':
       return {
@@ -158,12 +157,10 @@ export function CartProvider({ children }) {
         }),
 
       refreshCart
-
     }),
 
     [execute, refreshCart, state]
-
-);
+  );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

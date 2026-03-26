@@ -77,9 +77,9 @@ export function CartPage() {
                       type="button"
                       disabled={itemPending}
                       onClick={() => removeItem(item.id)}
-                      className="text-rose-300 hover:text-rose-200"
+                      className="text-rose-300 hover:text-rose-200 disabled:cursor-progress disabled:opacity-70"
                     >
-                      {itemPending ? 'Atualizando...' : 'Remover'}
+                      Remover
                     </button>
                   </div>
                 </article>

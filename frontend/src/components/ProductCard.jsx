@@ -31,7 +31,7 @@ export function ProductCard({ product, isPending, onAdd }) {
           onClick={onAdd}
           className="w-full rounded-full bg-emerald-400 px-4 py-3 font-semibold text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
         >
-          {isPending ? 'Adicionando...' : 'Adicionar ao carrinho'}
+          Adicionar ao carrinho
         </button>
 
       </div>
