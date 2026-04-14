@@ -1,13 +1,3 @@
-# Teste Técnico — Desenvolvedor Fullstack Python + React (Júnior/Pleno)
-
-Empresa: Wise Sales
-Nível: Júnior / Pleno (mesmo teste, avaliação pela qualidade da entrega)
-Tempo estimado: 3 a 4 horas
-Prazo de entrega: 7 dias corridos
-Entrega: repositório público no GitHub
-
----
-
 ## Sobre a Wise Sales
 
 A Wise Sales trabalha com vendas inteligentes. A stack do dia a dia é Python serverless no backend e React no frontend. Este teste simula um cenário próximo dessa rotina, cobrindo backend e frontend em partes iguais.
@@ -45,6 +35,12 @@ docker compose exec db psql -U wisesales -c "SELECT name, stock FROM products OR
 
 Você deve ver 6 produtos. Se não ver, verifique os logs com `docker compose logs db`.
 
+### Acessando o site e a API
+
+O site estará disponível em `http://localhost:5173`.
+
+A API estará disponível em `http://localhost:8000`.
+
 ### Variáveis de ambiente
 
 O `.env.example` tem as credenciais do banco:
@@ -72,30 +68,92 @@ Todo o código backend e frontend. A estrutura é livre, mas sugerimos:
 ```
 /
 ├── backend/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── repositories/
-│   ├── tests/
 │   ├── alembic/
+│   │   ├── versions/
+│   │   ├── env.py
+│   │   └── script.py.mako
+│   ├── src/
+│   │   ├── repositories/
+│   │   │   ├── cart_repository.py
+│   │   │   └── product_repository.py
+│   │   ├── routes/
+│   │   │   ├── cart.py
+│   │   │   └── product.py
+│   │   ├── services/
+│   │   │   ├── cart_service.py
+│   │   │   └── product_service.py
+│   │   ├── db.py
+│   │   ├── dependencies.py
+│   │   ├── exceptions.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   └── settings.py
+│   ├── tests/
+│   │   └── conftest.py
+│   │   └── test_api.py
+│   ├── alembic.ini
+│   ├── Dockerfile
+│   ├── pyproject.toml
 │   └── requirements.txt
 ├── frontend/
+│   ├── public/
+│   │   └── product-placeholder.svg
 │   ├── src/
-│   └── package.json
+│   │   ├── api/
+│   │   │   └── client.js
+│   │   ├── components/
+│   │   │   ├── CartSummary.jsx
+│   │   │   ├── FeedbackBanner.jsx
+│   │   │   ├── Layout.jsx
+│   │   │   └── ProductCard.jsx
+│   │   ├── context/
+│   │   │   ├── CartContext.jsx
+│   │   │   └── useCart.js
+│   │   ├── hooks/
+│   │   │   └── useProducts.js
+│   │   ├── pages/
+│   │   │   ├── CartPage.jsx
+│   │   │   └── CatalogPage.jsx
+│   │   ├── router/
+│   │   │   └── AppRouter.jsx
+│   │   ├── test/
+│   │   │   ├── api/
+│   │   │   │   └── client.test.js
+│   │   │   ├── test_components/
+│   │   │   │   ├── CartSummary.test.js
+│   │   │   │   ├── FeedbackBanner.test.js
+│   │   │   │   └── ProductCard.test.js
+│   │   │   ├── test_context/
+│   │   │   │   └── CartContext.test.jsx
+│   │   │   ├── test_pages/
+│   │   │   │   ├── CartPage.test.jsx
+│   │   │   │   └── CatalogPage.test.jsx
+│   │   │   └── setup.js
+│   │   ├── utils/
+│   │   │   └── formatters.js
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── Dockerfile
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── README.md
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── .env
+├── .env.example
+├── .gitignore
 ├── docker-compose.yml
-├── seed.sql
-└── .env
+├── LICENSE
+├── README.md
+└── seed.sql
 ```
 
 ---
-
-## Projeto: Mini E-commerce — Catálogo + Carrinho de Compras
-
-Desenvolva um mini e-commerce fullstack com catálogo de produtos e carrinho de compras. O backend é a API em Python, o frontend é a interface em React.
-
-### Parte 1: Backend Python (50%)
-
-Arquitetura N-layered (service/repository). Python 3.11, psycopg2 com raw SQL queries (sem ORM). Migrações com Alembic.
 
 #### 1. API de Produtos
 
@@ -125,9 +183,6 @@ Arquitetura N-layered (service/repository). Python 3.11, psycopg2 com raw SQL qu
 - Separação em camadas: routes → services → repositories
 - Connection pooling com psycopg2
 
-### Parte 2: Frontend React (50%)
-
-React + Vite, SPA, JavaScript (sem TypeScript), Tailwind CSS.
 
 #### 1. Página de Catálogo
 
@@ -165,76 +220,3 @@ React + Vite, SPA, JavaScript (sem TypeScript), Tailwind CSS.
 - **Testes frontend**: Vitest
 - **Linting**: Ruff (backend), ESLint + Prettier (frontend)
 - **Git**: commits atômicos com mensagens descritivas
-
-### Diferenciais (não obrigatórios)
-
-- Implementar arquitetura container + bundle dinâmico: um container em Vanilla JS que carrega o bundle React via tag `<script>` dinâmica. Isso simula o modelo real da Wise Sales, onde um container leve orquestra o carregamento de bundles hospedados em CDN
-- Testes de integração (além dos unitários)
-- Documentação da API (Swagger, Postman collection, ou seção no README)
-- Docker Compose para subir o projeto completo (backend + frontend + banco)
-- GitHub Actions para rodar testes e linting
-
----
-
-## Critérios de avaliação
-
-| Critério | Peso |
-|----------|------|
-| Funcionamento end-to-end (API + Frontend) | 25% |
-| Qualidade do código (backend e frontend) | 25% |
-| Modelagem de dados e lógica de negócio | 15% |
-| Experiência do usuário (usabilidade) | 15% |
-| Testes (pytest + Vitest) | 10% |
-| README e documentação | 10% |
-
----
-
-## Fluxo do processo
-
-1. Teste take-home: você recebe este repositório, desenvolve a solução e envia o link do seu repositório GitHub em até 7 dias
-2. Avaliação técnica: o código entregue é avaliado com base nos critérios deste documento
-3. Entrevista técnica com a Wise Sales: baseada no projeto entregue, o time avalia raciocínio, entendimento da solução e decisões técnicas
-
----
-
-## Instruções de entrega
-
-Crie um repositório público no GitHub com um `README.md` que contenha: descrição do projeto e funcionalidades implementadas, tecnologias utilizadas e por que as escolheu, instruções de instalação e execução (o projeto precisa rodar seguindo o README), decisões técnicas relevantes e o que faria diferente com mais tempo.
-
-### Prazo
-
-7 dias corridos a partir do recebimento do teste.
-
-### O que valorizamos
-
-Código limpo e organizado importa mais do que quantidade de features. Commits bem escritos mostram como você pensa. README bem feito mostra que você sabe se comunicar tecnicamente. Tratamento de erros, validações e separação de responsabilidades contam bastante. Raw SQL bem escrito e legível conta pontos. O projeto precisa rodar seguindo o README, sem ajustes.
-
-### O que não valorizamos
-
-Over-engineering para o escopo proposto. Código sem tratamento de erros. Repositório com um commit gigante. README genérico ou vazio. Projeto que não roda. Usar ORM quando o requisito é raw SQL.
-
----
-
-## Rubrica de avaliação
-
-| Nota | Classificação | Descrição |
-|------|--------------|-----------|
-| 9-10 | Excelente | Atende todos os requisitos, implementa diferenciais, código exemplar |
-| 7-8 | Bom | Atende os requisitos principais, código organizado, poucas falhas |
-| 5-6 | Satisfatório | Funciona parcialmente, organização básica, precisa de melhorias |
-| 3-4 | Insuficiente | Muitas falhas, código desorganizado, requisitos principais incompletos |
-| 0-2 | Eliminatório | Não funciona, plágio evidente, ou entrega vazia |
-
-Nota mínima para aprovação: 6.0
-
-### Diferenciação Júnior vs Pleno
-
-| Aspecto | Júnior (esperado) | Pleno (esperado) |
-|---------|-------------------|------------------|
-| Funcionalidades | Obrigatórias funcionando | Obrigatórias + diferenciais |
-| Código | Organizado e legível | Bem estruturado, com patterns claros (service/repository) |
-| SQL | Queries funcionais | Queries otimizadas, parametrizadas, sem SQL injection |
-| Erros | Tratamento básico | Tratamento completo com mensagens claras e status HTTP corretos |
-| Testes | Unitários básicos (pytest) | Unitários + integração, mocks, fixtures |
-| Carrinho | Funciona pro caso comum | Lida com edge cases (estoque, cupom expirado, quantidade 0) |
-| Frontend | Funcional, visual básico | Polido, loading states, feedback visual, responsivo |
